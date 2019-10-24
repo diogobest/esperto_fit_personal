@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Personal creates schedule' do
   before(:each) do
+    auth_api
     cpf_status_empty
     list_gyms
   end

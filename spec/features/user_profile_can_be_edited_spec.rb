@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'User profile can be edited' do
   before(:each) do
+    auth_api
     list_gyms
   end
 

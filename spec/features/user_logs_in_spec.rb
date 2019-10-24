@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'User Logs In' do
 
   scenario 'Successfully' do
+    auth_api
     cpf_status_empty
     list_gyms
     user = create(:account, password:'123456', document: '12345678908')
@@ -19,6 +20,7 @@ feature 'User Logs In' do
   end
 
   scenario 'and must exist' do
+    auth_api
     list_gyms
     #Act
     visit root_path
@@ -35,6 +37,7 @@ feature 'User Logs In' do
   end
 
   scenario 'and must not be banished' do
+    auth_api
     cpf_status
     list_gyms
     user = create(:account, password:'123456', document: '99999999999')
@@ -53,6 +56,7 @@ feature 'User Logs In' do
   end
 
   scenario 'and must not be Inactive' do
+    auth_api
     cpf_status_inactive
     list_gyms
     user = create(:account, password:'123456', document: '88888888888')

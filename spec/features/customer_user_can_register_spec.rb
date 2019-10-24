@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Customer can register into system' do
   before(:each) do
+    auth_api
     list_gyms
   end
   

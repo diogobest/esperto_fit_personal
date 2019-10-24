@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Personal authenticates to create schedule' do
   before(:each) do
+    auth_api
     list_gyms
   end
   

@@ -72,5 +72,16 @@ module RequestStub
     stub_request(:get, url).
       to_return(status: 200, body: json_response, headers: {'Content-Type': 'application/json'})
   end
-
+  def auth_api
+    stub_request(:post, "http://esperto_fit_academy_web_run_1:3000/employees/sign_in").
+          with(
+            body: {"commit"=>"Entrar", "employee"=>{"email"=>"admin@espertofit.com.br", "password"=>"123456"}},
+            headers: {
+        	  'Accept'=>'*/*',
+        	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        	  'Content-Type'=>'application/x-www-form-urlencoded',
+        	  'User-Agent'=>'Faraday v0.15.4'
+            }).
+          to_return(status: 200, body: "", headers: {})
+  end
 end

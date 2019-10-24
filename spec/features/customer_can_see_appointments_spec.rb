@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Customer can see apppointments' do
   before(:each) do
+    auth_api
     list_gyms
   end
 
@@ -38,13 +39,11 @@ feature 'Customer can see apppointments' do
     schedule = create(:schedule, date: '10/09/2019', start: 10, finish: 12, price: "50", personal: personal_account, unit: unit)
     other_schedule = create(:schedule, date: '11/09/2019', start: 10, finish: 12, price: "50", personal: personal_account, unit: other_unit)
 
-    #byebug
     schedule.create_appointments
     other_schedule.create_appointments
-
-    #byebug
+    
     login_as(customer_account, scope: :account)
-    visit view_appointment_path(other_unit)
+    visit view_appointment_path(other_schedule)
 
     expect(current_path).to eq root_path
   end

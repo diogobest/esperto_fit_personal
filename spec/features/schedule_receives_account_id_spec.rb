@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Schedule receives account ID' do
   before(:each) do
+    auth_api
     cpf_status_empty
     list_gyms
   end
