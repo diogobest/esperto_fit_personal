@@ -19,10 +19,6 @@ class SchedulesController < ApplicationController
     end
   end
 
-  def show
-    @schedule = Schedule.find(params[:id])
-  end
-
   def my_schedule
     redirect_to root_path unless current_account.type == "Personal"
     @schedules = Schedule.where(personal: current_account)

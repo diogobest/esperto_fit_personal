@@ -24,8 +24,10 @@ class Account < ApplicationRecord
   end
 
   def banished?
+    token = LoginAcademy.sign_in
     response = EspertoAcademy.client.get do |req|
       req.url "clients/consult_cpf/#{self.document}"
+      req.headers[:authorization] = token
     end
     return false if response.status == 404
 
@@ -38,8 +40,10 @@ class Account < ApplicationRecord
   end
 
   def inactive?
+    token = LoginAcademy.sign_in
     response = EspertoAcademy.client.get do |req|
       req.url "clients/consult_cpf/#{self.document}"
+      req.headers[:authorization] = token
     end
     return false if response.status == 404
 
@@ -49,5 +53,4 @@ class Account < ApplicationRecord
   rescue Faraday::ParsingError
     return false
   end
-
 end

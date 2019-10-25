@@ -8,8 +8,10 @@ class Plan
   end
 
   def self.gym_plans(gym_id)
+    token = LoginAcademy.sign_in
     response = EspertoAcademy.client.get do |req|
       req.url "gyms/#{gym_id}/plans"
+      req.headers[:authorization] = token
     end
     return [] unless response.status == 200 
 

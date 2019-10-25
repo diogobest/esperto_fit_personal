@@ -59,7 +59,7 @@ module RequestStub
 
   def list_payments
     filename = 'payments.json'
-    url      = 'http://0.0.0.0:5000/api/v1/payments/41370123850'
+    url      = 'http://0.0.0.0:3000/api/v1/payments/22345678901'
     json_response = File.read(Rails.root.join('spec', 'support', "#{filename}"))
 
     stub_request(:get, url)

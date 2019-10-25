@@ -15,22 +15,12 @@ class Gym
       req.headers[:authorization] = token
     end
     return response.body.map { |gym| new(gym) } if response.status == 200
-
-    # []
+  rescue Faraday::ConnectionFailed
+    [ ]
+  rescue Faraday::ParsingError
+    [ ]
   end
 
-  def self.find(id)
-    response = EspertoAcademy.client.get do |req|
-      req.url "gyms/#{id}"
-    end
-    return response.body if response.status == 200
-
-    # []
-  # rescue Faraday::ConnectionFailed
-  #   [] 
-  # rescue Faraday::ParsingError
-  #   [] 
-  end
 
   def imgs
     return ['logo_Compact_White.jpg'] unless self.images
