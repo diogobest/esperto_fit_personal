@@ -25,7 +25,6 @@ class EspertoAcademy
       Faraday.new(url: esperto_academy_url) do |faraday|
         faraday.use :instrumentation
         faraday.headers['Content-Type'] = 'application/json'
-
         faraday.response :json, parser_options: { symbolize_names: true },
           content_type: /\bjson$/
         faraday.adapter :net_http

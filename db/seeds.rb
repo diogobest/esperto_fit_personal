@@ -10,7 +10,7 @@ Unit.load_api
 #First set of customers, personals and schedules
 unit = Unit.first
 customer_acc = Account.create(document: '12345678900', email: 'customer@email.com', password: '123456', type: 'Customer', unit: unit)
-personal_acc = Account.create!(document: '12345678910', email: 'personal@email.com', password: '123456', type: 'Personal', unit: unit)
+personal_acc = Account.create!(document: '12345678911', email: 'personal@email.com', password: '123456', type: 'Personal', unit: unit)
 
 Enrollment.new(account: customer_acc, unit: unit)
 
@@ -22,8 +22,8 @@ schedule.create_appointments
 
 #second set of customers, personals and schedules
 other_unit = Unit.last
-other_customer_acc = Account.create(document: '12345678900'.reverse, email: 'other_customer@email.com', password: '123456', type: 'Customer', unit: other_unit)
-other_personal_acc = Account.create!(document: '12345678910'.reverse, email: 'other_personal@email.com', password: '123456', type: 'Personal', unit: other_unit)
+other_customer_acc = Account.create(document: '12345678903'.reverse, email: 'other_customer@email.com', password: '123456', type: 'Customer', unit: other_unit)
+other_personal_acc = Account.create!(document: '12345678912'.reverse, email: 'other_personal@email.com', password: '123456', type: 'Personal', unit: other_unit)
 
 Enrollment.new(account: other_customer_acc, unit: other_unit)
 

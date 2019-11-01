@@ -2,9 +2,6 @@ class Payments
   attr_reader :cpf, :payments
 
   def initialize(**args)
-    args.each do |key, value|
-      instance_variable_set("@#{key.to_s}", value)
-    end
   end
 
   def self.find(cpf)
@@ -13,11 +10,11 @@ class Payments
     end
     return response.body if response.status == 200
 
-    []
+    # []  
   rescue Faraday::ConnectionFailed
-    []
+    # []
   rescue Faraday::ParsingError
-    [] 
+    # [] 
   end
 
 end

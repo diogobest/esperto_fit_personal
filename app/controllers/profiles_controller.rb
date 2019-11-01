@@ -3,9 +3,7 @@ class ProfilesController < ApplicationController
   before_action :set_id, only: %i[edit update]
   before_action :authenticate_account!, only: %i[new create edit update]
 
-  def index
-
-  end
+  def index;  end
 
   def new
     @profile = Profile.new
@@ -43,6 +41,7 @@ class ProfilesController < ApplicationController
   def payments
     @payments = Payments.find(Profile.find(params[:id]).account.document)
   end
+
   private
 
   def profile_params

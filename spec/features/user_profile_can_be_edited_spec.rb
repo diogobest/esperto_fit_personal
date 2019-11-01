@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'User profile can be edited' do
   before(:each) do
+    auth_api
     list_gyms
   end
 
@@ -64,7 +65,8 @@ feature 'User profile can be edited' do
 
     #Assert
     expect(page).to have_content('Cadastro não editado.')
-    expect(page).to have_content('Nome Campo Obrigatório')
+    expect(page).to have_content('Nome não pode ficar em branco')
+    expect(page).to have_content('Sobrenome não pode ficar em branco')
   end
 
   scenario '4: cannot access edit path if user not signed in' do

@@ -1,9 +1,9 @@
 development:
-  base_url: http://0.0.0.0:4000
-  payment_url: http://0.0.0.0:5000
+  base_url: http://esperto_fit_academy_web_run_1:3000
+  payment_url: http://0.0.0.0:3000
 production:
   base_url: https://example.com.br/
-  payment_url: http://0.0.0.0:5000
+  payment_url: http://0.0.0.0:3000
 test:
   base_url: http://academy.com.br
-  payment_url: http://0.0.0.0:5000
+  payment_url: http://0.0.0.0:3000

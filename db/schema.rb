@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_09_18_180029) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -21,28 +24,28 @@ ActiveRecord::Schema.define(version: 2019_09_18_180029) do
     t.datetime "remember_created_at"
     t.string "type"
     t.string "email"
-    t.integer "schedule_id"
+    t.bigint "schedule_id"
     t.string "document"
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
     t.index ["schedule_id"], name: "index_accounts_on_schedule_id"
   end
 
   create_table "appointments", force: :cascade do |t|
-    t.integer "account_id"
+    t.bigint "account_id"
     t.integer "start_hour"
     t.integer "end_hour"
     t.date "date_appointment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "available"
-    t.integer "schedule_id"
+    t.bigint "schedule_id"
     t.index ["account_id"], name: "index_appointments_on_account_id"
     t.index ["schedule_id"], name: "index_appointments_on_schedule_id"
   end
 
   create_table "customer_appointments", force: :cascade do |t|
-    t.integer "account_id"
-    t.integer "appointment_id"
+    t.bigint "account_id"
+    t.bigint "appointment_id"
     t.string "name_class"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +56,8 @@ ActiveRecord::Schema.define(version: 2019_09_18_180029) do
   create_table "enrollments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "unit_id"
-    t.integer "account_id"
+    t.bigint "unit_id"
+    t.bigint "account_id"
     t.index ["account_id"], name: "index_enrollments_on_account_id"
     t.index ["unit_id"], name: "index_enrollments_on_unit_id"
   end
@@ -71,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_09_18_180029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "work_document"
-    t.integer "account_id"
+    t.bigint "account_id"
     t.integer "plan"
     t.index ["account_id"], name: "index_profiles_on_account_id"
   end
@@ -81,10 +84,10 @@ ActiveRecord::Schema.define(version: 2019_09_18_180029) do
     t.string "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "unit_id"
+    t.bigint "unit_id"
     t.integer "start"
     t.integer "finish"
-    t.integer "account_id"
+    t.bigint "account_id"
     t.index ["account_id"], name: "index_schedules_on_account_id"
     t.index ["unit_id"], name: "index_schedules_on_unit_id"
   end
@@ -101,4 +104,14 @@ ActiveRecord::Schema.define(version: 2019_09_18_180029) do
     t.string "address"
   end
 
+  add_foreign_key "accounts", "schedules"
+  add_foreign_key "appointments", "accounts"
+  add_foreign_key "appointments", "schedules"
+  add_foreign_key "customer_appointments", "accounts"
+  add_foreign_key "customer_appointments", "appointments"
+  add_foreign_key "enrollments", "accounts"
+  add_foreign_key "enrollments", "units"
+  add_foreign_key "profiles", "accounts"
+  add_foreign_key "schedules", "accounts"
+  add_foreign_key "schedules", "units"
 end

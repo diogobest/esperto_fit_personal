@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :units, only: %i[index show]
   resources :personals, only: %i[index new create edit]
-  resources :schedules, only:%i[new create edit update show]
+  resources :schedules, only:%i[new create edit update ]
   resources :plans, only: %i[ new create ]
   resources :appointments, only:%i[show] do
     get 'view', on: :member

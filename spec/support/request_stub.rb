@@ -59,7 +59,7 @@ module RequestStub
 
   def list_payments
     filename = 'payments.json'
-    url      = 'http://0.0.0.0:5000/api/v1/payments/41370123850'
+    url      = 'http://0.0.0.0:3000/api/v1/payments/22345678901'
     json_response = File.read(Rails.root.join('spec', 'support', "#{filename}"))
 
     stub_request(:get, url)
@@ -72,5 +72,16 @@ module RequestStub
     stub_request(:get, url).
       to_return(status: 200, body: json_response, headers: {'Content-Type': 'application/json'})
   end
-
+  def auth_api
+    stub_request(:post, "http://esperto_fit_academy_web_run_1:3000/employees/sign_in").
+          with(
+            body: {"commit"=>"Entrar", "employee"=>{"email"=>"admin@espertofit.com.br", "password"=>"123456"}},
+            headers: {
+        	  'Accept'=>'*/*',
+        	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        	  'Content-Type'=>'application/x-www-form-urlencoded',
+        	  'User-Agent'=>'Faraday v0.15.4'
+            }).
+          to_return(status: 200, body: "", headers: {})
+  end
 end
