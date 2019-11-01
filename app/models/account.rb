@@ -43,11 +43,11 @@ class Account < ApplicationRecord
     token = LoginAcademy.sign_in
     response = EspertoAcademy.client.get do |req|
       req.url "clients/consult_cpf/#{self.document}"
-      req.headers[:authorization] = token
+        
     end
     return false if response.status == 404
-
-    response.body[:status] == 'inactive' 
+byebug
+    response.body[:data][:attributes][:status] == 'inactive' 
   rescue Faraday::ConnectionFailed
     return false
   rescue Faraday::ParsingError

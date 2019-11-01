@@ -1,6 +1,6 @@
 class Gym
-  attr_reader :id, :cod, :name, :open_hour, :close_hour,
-              :working_days, :address, :images
+  attr_reader :id, :name, :open_hour, :close_hour,
+              :working_days, :address, :gallery
 
   def initialize(**args)
     args.each do |key, value|
@@ -14,16 +14,17 @@ class Gym
       req.url 'gyms'
       req.headers[:authorization] = token
     end
-    return response.body.map { |gym| new(gym) } if response.status == 200
-  rescue Faraday::ConnectionFailed
-    [ ]
-  rescue Faraday::ParsingError
-    [ ]
+    # byebug
+    return response.body[:data].map { |gym| new(gym[:attributes]) } if response.status == 200
+  # rescue Faraday::ConnectionFailed
+  #   [ ]
+  # rescue Faraday::ParsingError
+  #   [ ]
   end
 
 
   def imgs
-    return ['logo_Compact_White.jpg'] unless self.images
-    self.images
+    return ['logo_Compact_White.jpg'] unless self.gallery
+    self.gallery
   end  
 end

@@ -15,12 +15,12 @@ class Plan
     end
     return [] unless response.status == 200 
 
-    response.body[:plans].map { |plan| new(plan) }
+    response.body[:data].map { |plan| new(plan[:attributes]) }
 
   rescue Faraday::ConnectionFailed
-    [] 
+    # [] 
   rescue Faraday::ParsingError
-    [] 
+    # [] 
   end
 
 
